@@ -5,6 +5,7 @@ using UnityEngine.Events;
 public class PathManagerScript : MonoBehaviour
 {
     public Path[] paths;
+    public bool startAtPosition0;
     [HideInInspector] public bool usingNavMesh;
     private NavMeshAgent agent;
     public UnityEvent onPathStart;
@@ -39,6 +40,11 @@ public class PathManagerScript : MonoBehaviour
     public void StartPath()
     {
         onPathStart.Invoke();
+        if (startAtPosition0 == true)
+        {
+            transform.position = paths[0].pathPoint.position;
+            pathIndex = 1;
+        }
         pathStarted = true;
     }
 
